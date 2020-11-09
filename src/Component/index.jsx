@@ -6,8 +6,8 @@ Component.propTypes = {
 
 function Component(props) {
     return (
-        <div>
-            Hello
+        <div className="test">
+            Hello Project
         </div>
     );
 }
