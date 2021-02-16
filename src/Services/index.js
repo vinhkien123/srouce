@@ -1,2 +1,2 @@
-// import pokemon from './Pokemon'
-// export const pokemonServices = new pokemon() 
+import Pokemon from './product'
+export const pokemonServices = new Pokemon() 

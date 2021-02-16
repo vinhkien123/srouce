@@ -1,17 +1,42 @@
 import React, { useEffect } from 'react';
-import { gsap } from 'gsap'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createAciton } from '../Redux/action';
+import { LOGIN } from '../Redux/action/type';
+import $ from 'jquery'
 function Component(props) {
-    useEffect(() => {
-        const timeLine = gsap.timeline()
-        timeLine.from(".welcome", { x: "-50%", scale: 0, opacity: 0, rotation: 360, duration: 1 })
-            .from(".info", { x: "50%", scale: 0, opacity: 0, rotation: 360, duration: 0.5 })
+    const dispatch = useDispatch()
+    const login = useSelector(state => state.productReducer.login)
 
-    }, [])
+
+    function submit() {
+        dispatch(createAciton(LOGIN, true))
+    }
+    function onClick() {
+        if ($(".login").hasClass('active')) {
+            $(".login").removeClass("active")
+        } else {
+            $(".login").addClass("active")
+        }
+    }
+
+    function bodyClick(){
+
+    }
+    useEffect(()=>{
+        document.body.addEventListener('click',bodyClick)
+        
+        return () => {
+            document.body.removeEventListener('click',  )
+        }
+    },[])
     return (
-        <div className="test" style={{ textAlign: "center" }}>
-            <p className="welcome " style={{ fontSize: "40px", marginTop: "30px", marginBottom: "30px" }}>Hello Project</p>
-            <p className="info" style={{ color: "blue" ,fontSize: "30px"}}>Diệp Vĩnh Kiên</p>
+        <div>
+            {login ?
+                <div className="login" onClick={onClick} >đăng nhập thành công</div> :
+                <p className="hello">hello</p>
+
+            }
+            <button onClick={submit}>Đăng nhập</button>
         </div>
     );
 }
